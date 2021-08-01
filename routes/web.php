@@ -15,7 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => '/email/templates'], function() {
-    Route::get('/', 'EmailTemplatesController@index')->name('email.templates.index');
-    Route::post('/', 'EmailTemplatesController@store')->name('email.templates.store');
+Route::group(['prefix' => '/email'], function() {
+    Route::group(['prefix' => '/templates'], function() {
+        Route::get('/', 'EmailTemplatesController@index')->name('email.templates.index');
+        Route::post('/', 'EmailTemplatesController@store')->name('email.templates.store');
+    });
+    Route::group(['prefix' => '/logs'], function() {
+        Route::get('/', 'EmailLogsController@index')->name('email.logs.index');
+        Route::post('/', 'EmailLogsController@store')->name('email.logs.store');
+    });
 });
