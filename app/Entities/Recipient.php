@@ -20,7 +20,7 @@ class Recipient extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['name', 'email'];
 
     public function emailLogs() {
         return $this->belongsToMany(EmailLog::class, 'email_log_recipient', 'recipient_id', 'email_log_id');

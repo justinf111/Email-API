@@ -20,7 +20,7 @@ class EmailLog extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = [''];
+    protected $fillable = ['subject', 'email_template_id'];
 
     public function emailTemplate() {
         return $this->belongsTo(EmailTemplate::class, 'email_template_id');
