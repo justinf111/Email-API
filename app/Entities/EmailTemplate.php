@@ -23,6 +23,9 @@ class EmailTemplate extends Model implements Transformable
     protected $fillable = ['content'];
 
     public function emailLogs() {
-        return $this->hasMany(EmailLog::class, 'email_template_id');
+        return $this->hasMany(
+            EmailLog::class,
+            'email_template_id'
+        );
     }
 }

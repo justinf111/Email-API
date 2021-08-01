@@ -23,6 +23,12 @@ class Recipient extends Model implements Transformable
     protected $fillable = ['name', 'email'];
 
     public function emailLogs() {
-        return $this->belongsToMany(EmailLog::class, 'email_log_recipient', 'recipient_id', 'email_log_id');
+        return $this->belongsToMany(
+                EmailLog::class,
+                'email_log_recipient',
+                'recipient_id',
+                'email_log_id'
+            )
+            ->withPivot('status');
     }
 }
