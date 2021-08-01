@@ -17,7 +17,6 @@ class EmailLogsControllerTest extends TestCase
      */
     public function add_email_log()
     {
-        $this->withoutExceptionHandling();
         $existingRecipient = factory(Recipient::class)->create();
         $recipients = factory(Recipient::class, 4)->make();
         $recipients = $recipients->push($existingRecipient);
