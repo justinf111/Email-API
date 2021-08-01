@@ -17,6 +17,7 @@ return [
     */
 
     'driver' => env('MAIL_DRIVER', 'smtp'),
+    'backup_driver' => env('BACKUP_MAIL_DRIVER', 'smtp'),
 
     /*
     |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ return [
     */
 
     'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'backup_host' => env('BACKUP_MAIL_HOST', 'smtp.mailgun.org'),
 
     /*
     |--------------------------------------------------------------------------
@@ -43,6 +45,7 @@ return [
     */
 
     'port' => env('MAIL_PORT', 587),
+    'backup_port' => env('BACKUP_MAIL_PORT', 587),
 
     /*
     |--------------------------------------------------------------------------
@@ -60,6 +63,11 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    'backup_from' => [
+        'backup_address' => env('BACKUP_MAIL_FROM_ADDRESS', 'hello@example.com'),
+        'backup_name' => env('BACKUP_MAIL_FROM_NAME', 'Example'),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | E-Mail Encryption Protocol
@@ -72,6 +80,7 @@ return [
     */
 
     'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'backup_encryption' => env('BACKUP_MAIL_ENCRYPTION', 'tls'),
 
     /*
     |--------------------------------------------------------------------------
@@ -85,8 +94,10 @@ return [
     */
 
     'username' => env('MAIL_USERNAME'),
+    'backup_username' => env('BACKUP_MAIL_USERNAME'),
 
     'password' => env('MAIL_PASSWORD'),
+    'backup_password' => env('BACKUP_MAIL_PASSWORD'),
 
     /*
     |--------------------------------------------------------------------------
