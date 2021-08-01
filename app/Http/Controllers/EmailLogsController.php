@@ -73,12 +73,14 @@ class EmailLogsController extends Controller
             $this->validator->with($request->all())->passesOrFail();
             $emailLog = $this->repository->create($request->only('subject', 'email_template_id'));
             $emailLog = $addRecipientsToEmailLog->execute($emailLog, collect($request->get('recipients')));
-            $emailLog = $sendEmailToRecipients->execute($emailLog);
+
+            $sendEmailToRecipients->execute($emailLog);
 
             $response = [
-                'message' => 'Email Log created.',
+                'message' => 'Email has been created as is being sent to recipients.',
                 'data'    => $emailLog->toArray(),
             ];
+
             return response()->json($response);
         } catch (ValidatorException $e) {
             return response()->json([
