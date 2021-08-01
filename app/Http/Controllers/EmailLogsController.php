@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\AddRecipientsToEmailLog;
+use App\Actions\SendEmailToRecipients;
 use App\Entities\Recipient;
 use App\Repositories\RecipientRepository;
 use Illuminate\Http\Request;
@@ -66,12 +67,14 @@ class EmailLogsController extends Controller
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(AddRecipientsToEmailLog $addRecipientsToEmailLog, RecipientRepository $recipientRepository, Request $request)
+    public function store(SendEmailToRecipients $sendEmailToRecipients, AddRecipientsToEmailLog $addRecipientsToEmailLog, RecipientRepository $recipientRepository, Request $request)
     {
         try {
             $this->validator->with($request->all())->passesOrFail();
             $emailLog = $this->repository->create($request->only('subject', 'email_template_id'));
             $emailLog = $addRecipientsToEmailLog->execute($emailLog, collect($request->get('recipients')));
+            $emailLog = $sendEmailToRecipients->execute($emailLog);
+
             $response = [
                 'message' => 'Email Log created.',
                 'data'    => $emailLog->toArray(),
