@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\EmailTemplateCreateRequest;
-use App\Http\Requests\EmailTemplateUpdateRequest;
 use App\Repositories\EmailTemplateRepository;
 use App\Validators\EmailTemplateValidator;
 
@@ -68,7 +66,7 @@ class EmailTemplatesController extends Controller
     public function store(Request $request)
     {
         try {
-            $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
+            $this->validator->with($request->all())->passesOrFail();
             $emailTemplate = $this->repository->create($request->all());
             $response = [
                 'message' => 'Email Template created.',
